@@ -23,6 +23,7 @@ const paymentProcessorFallbacktHttp = new Httpx({
 });
 
 const backendHttp = new Httpx({
+    // baseURL: "http://rinha-api-1:3000",
     baseURL: "http://nginx",
     //baseURL: "http://localhost:5123",
     headers: {

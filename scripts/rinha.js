@@ -18,7 +18,7 @@ import {
 // https://mikemcl.github.io/big.js/
 import Big from "https://cdn.jsdelivr.net/npm/big.js@7.0.1/big.min.js";
 
-const MAX_REQUESTS = __ENV.MAX_REQUESTS ?? 500;
+const MAX_REQUESTS = __ENV.MAX_REQUESTS ?? 550;
 
 export const options = {
   summaryTrendStats: [
@@ -202,8 +202,8 @@ export async function checkPaymentsConsistency() {
 
   const now = new Date();
 
-  const from = new Date(now - 1000 * 10).toISOString();
-  const to = new Date(now - 100).toISOString();
+  const from = new Date(now - 1000 * 15).toISOString();
+  const to = new Date(now - 2500).toISOString();
 
   const defaultAdminPaymentsSummaryPromise = getPPPaymentsSummary(
     "default",
@@ -222,6 +222,10 @@ export async function checkPaymentsConsistency() {
     fallbackAdminPaymentsSummaryPromise,
     backendPaymentsSummaryPromise
   ]);
+  console.log("Resumo de pagamentos do Admin:");
+  console.log("Default:", defaultAdminPaymentsSummary);
+  console.log("Fallback:", fallbackAdminPaymentsSummary);
+  console.log("Backend:", backendPaymentsSummary);
 
   const inconsistencies =
       Math.abs(
